@@ -7,7 +7,10 @@ This little bit of micropython on an ESP8266 will unpack the I2C GPS fix into a 
 '''
 
 from machine import Pin, I2C
-from struct import unpack
+try:
+    from struct import unpack
+except ImportError:
+    from ustruct import unpack
 
 def decode_gps(buf):
     v = unpack('<BBHBBBBBBlllL', buf)
