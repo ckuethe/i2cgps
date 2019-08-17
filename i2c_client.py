@@ -34,10 +34,15 @@ def decode_gps(buf):
     return decoded
 
 
+def readgps(bus, gps):
+    msgsize = bus.readfrom(gps, 1)[0]
+    buf = bytearray(msgsize)
+    bus.readfrom_into(gps, buf)
+    print(decode_gps(buf))
+
 
 gps = ord('X') # X marks the spot
 bus = I2C(sda=Pin(4), scl=Pin(5), freq=100000);
-devs = bus.scan()
-msgsize = bus.read(gps, 1)[0]
-print(decode_gps(buf))
+assert gps in bus.scan()
 
+readgps(bus, gps)
