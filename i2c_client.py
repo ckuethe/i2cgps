@@ -23,7 +23,7 @@ def decode_gps(buf):
     # Depending on the receiver, 4 digit years from ZDA might be available.
     # This little dance tries to get the year into some reasonable value.
     if decoded['time'][0] < 1900:
-        if decoded['time'][0] < 93:
+        if decoded['time'][0] >= 93:
             # GPS Initial Operational Capability was in 1993/12/08
             decoded['time'][0] += 1900
         else:
