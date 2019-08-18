@@ -13,13 +13,13 @@ except ImportError:
     from ustruct import unpack
 
 def decode_gps(buf):
-    v = unpack('<BBHBBBBBBlllL', buf)
+    v = unpack('<BBHBBBBBlllL', buf)
     decoded = {
         'status': v[1],
         'time': list(v[2:8]), # needs to be mutable, for year fixups
-        'lat': v[9]/1e7,
-        'lon': v[10]/1e7,
-        'alt': v[11]/1e2,
+        'lat': v[8]/1e7,
+        'lon': v[9]/1e7,
+        'alt': v[10]/1e2,
         'speed': v[11]/1943.84, # kt*1000 -> m/s
     }
 
